@@ -29,3 +29,9 @@ for t in range(500):
     grad_h = grad_h_relu.copy()
     grad_h[h < 0] = 0
     grad_w1 = x.T.dot(grad_h)
+
+    #Update weights
+    w1 -= learning_rate * grad_w1
+    w2 -= learning_rate * grad_w2
+
+    
