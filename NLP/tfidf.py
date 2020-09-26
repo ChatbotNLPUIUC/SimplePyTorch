@@ -28,6 +28,13 @@ def computeIDF(documents):
         idfDict[word] = math.log(N/float(val))
     return idfDict
 
+#IF-DIF is just TF mulitplied by IDF
+def computeTFIDF(tfBagOfWords, idfs):
+    tfidf = {}
+    for word, val in tfBagOfWords.items():
+        tfidf[word] = val * idfs[word]
+    return tfidf
+
 documentA = 'the man went out for a walk'
 documentB = 'the children sat around the fire'
 
@@ -53,4 +60,10 @@ tfB = computeTF(numOfWordsB, bagofWordsB)
 #print(tfB)
 
 idfs = computeIDF([numOfWordsA, numOfWordsB])
-print(idfs)
+#print(idfs)
+
+tfidfA = computeTFIDF(tfA, idfs)
+tfidfB = computeTFIDF(tfB, idfs)
+
+df = pd.DataFrame([tfidfA, tfidfB])
+print(df)
